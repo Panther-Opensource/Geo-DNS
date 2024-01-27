@@ -21,7 +21,7 @@ func StartHealthChecks() {
 				continue
 			}
 			ping := int(time.Now().UnixMilli() - start)
-			if res.StatusCode == 200 && ping < 1000 {
+			if (res.StatusCode == 200 || res.StatusCode == 404) && ping < 1000 {
 				availableNodes = append(availableNodes, structs.Pop{
 					Ip:       node,
 					Hostname: name,
