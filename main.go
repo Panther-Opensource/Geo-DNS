@@ -23,7 +23,12 @@ func main() {
 		})
 	}
 
-	stores.Db, _ = ip2location.OpenDB("IP2LOCATION-LITE-DB5.bin")
+	p, _ := os.Getwd()
+	loaded, e := ip2location.OpenDB(fmt.Sprintf("%v/%v", p, "IP2LOCATION-LITE-DB5.BIN"))
+	if e != nil {
+		fmt.Println("Could not load IP DB")
+	}
+	stores.Db = loaded
 
 	// Define DNS server configuration
 	addr := ":53" // Listen on port 53, the default DNS port
